@@ -1,0 +1,13 @@
+node_modules/
+*.log
+.DS_Store
+
+# Segreti e backup — NON committare mai
+.env
+.env.*
+data/content.json.bak
+data/*.bak
+
+# Cache varie
+.cache/
+coverage/
