@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="292" height="44" viewBox="110 210 292 44" role="img" aria-label="MEIKASA.IT solo scritta" shape-rendering="geometricPrecision">
+  <title>MEIKASA.IT — solo scritta vettoriale</title>
+  <desc>Scritta vettoriale MEIKASA.IT separata dal logo completo, con sfondo trasparente.</desc>
+  <defs>
+    <style><![CDATA[
+      .beige { fill: #E3D3A6; }
+      .green { fill: #304634; }
+      .red { fill: #CF2628; }
+      .white { fill: #FAFAF6; }
+      .wm { fill: none; stroke: #E3D3A6; stroke-width: 6; stroke-linecap: butt; stroke-linejoin: bevel; }
+    ]]></style>
+  </defs>
+
+  <g id="wordmark">
+    <!-- M -->
+    <path class="wm" d="M120.5 247 L120.5 215 L134.5 238.5 L148.5 215 L148.5 247"/>
+
+    <!-- E: ultima astina con bandierina integrata, coerente con l'originale -->
+    <path class="wm" d="M165 239 L165 215 M165 218 L186 218 M165 229 L184 229"/>
+    <g id="tricolore-scritta">
+      <rect class="beige" x="162" y="238.5" width="26.5" height="4.25" rx="0.35"/>
+      <rect class="green" x="162" y="242.75" width="8.83" height="4.25" rx="0.35"/>
+      <rect class="white" x="170.83" y="242.75" width="8.84" height="4.25" rx="0.35"/>
+      <rect class="red" x="179.67" y="242.75" width="8.83" height="4.25" rx="0.35"/>
+    </g>
+
+    <!-- I -->
+    <rect class="beige" x="195" y="215" width="7" height="32" rx="0.5"/>
+
+    <!-- K -->
+    <path class="wm" d="M213 215 L213 247 M235 215 L216 231 M237 247 L216 231"/>
+
+    <!-- A -->
+    <path class="wm" d="M243 247 L257 215 L271 247 M248.5 238 L265.5 238"/>
+
+    <!-- S -->
+    <path class="beige" d="M300.916,215.622 L300.916,222.561 Q298.308,221.353 295.823,220.742 Q293.345,220.124 291.138,220.124 Q288.212,220.124 286.806,220.96 Q285.408,221.789 285.408,223.545 Q285.408,224.865 286.351,225.603 Q287.295,226.333 289.78,226.86 L293.257,227.583 Q298.539,228.686 300.766,230.926 Q303,233.16 303,237.289 Q303,242.704 299.89,245.352 Q296.781,248 290.391,248 Q287.383,248 284.348,247.403 Q281.313,246.813 278.278,245.647 L278.278,238.518 Q281.313,240.183 284.145,241.033 Q286.976,241.876 289.611,241.876 Q292.286,241.876 293.705,240.956 Q295.124,240.029 295.124,238.315 Q295.124,236.784 294.16,235.948 Q293.196,235.112 290.31,234.452 L287.146,233.729 Q282.393,232.675 280.193,230.371 Q278,228.068 278,224.163 Q278,219.268 281.055,216.634 Q284.111,214 289.841,214 Q292.455,214 295.212,214.407 Q297.969,214.815 300.916,215.622 Z"/>
+
+    <!-- A -->
+    <path class="wm" d="M309 247 L323 215 L337 247 M314.5 238 L331.5 238"/>
+
+    <!-- .IT -->
+    <circle class="beige" cx="348" cy="243" r="4"/>
+    <rect class="beige" x="358" y="215" width="6" height="32" rx="0.5"/>
+    <path class="wm" d="M369 218 L395 218 M382 215 L382 247"/>
+  </g>
+</svg>

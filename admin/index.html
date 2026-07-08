@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pannello di gestione — Metara</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon-64.png" />
+    <link rel="stylesheet" href="/admin/admin.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-left">
+        <img src="/assets/logo.png" alt="Meikasait" class="logo logo-img" />
+        <strong>Meikasait · Gestione homepage</strong>
+      </div>
+      <div class="topbar-right">
+        <a class="btn ghost" href="/" target="_blank" rel="noreferrer">👁 Vedi sito</a>
+        <button class="btn ghost" id="reloadBtn" type="button">↺ Ricarica</button>
+        <button class="btn primary" id="saveBtn" type="button">💾 Salva modifiche</button>
+        <button class="btn ghost" id="logoutBtn" type="button">Esci</button>
+      </div>
+    </header>
+
+    <div class="toast" id="toast"></div>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="tema">🎨 Tema</button>
+      <button class="tab" data-tab="brand">🏷️ Brand &amp; Logo</button>
+      <button class="tab" data-tab="nav">🧭 Menu</button>
+      <button class="tab" data-tab="banner">📢 Banner</button>
+      <button class="tab" data-tab="layout">🧩 Composizione</button>
+      <button class="tab" data-tab="hero">🚀 Hero</button>
+      <button class="tab" data-tab="services">⚙️ Servizi</button>
+      <button class="tab" data-tab="works">🖼️ Vetrina lavori</button>
+      <button class="tab" data-tab="marketing">📣 Marketing/Social</button>
+      <button class="tab" data-tab="packages">📦 Pacchetti</button>
+      <button class="tab" data-tab="contact">✉️ Contatti</button>
+      <button class="tab" data-tab="seo">🔎 SEO</button>
+      <button class="tab" data-tab="privacy">🔒 Privacy</button>
+      <button class="tab" data-tab="sicurezza">🛡️ Sicurezza</button>
+      <button class="tab" data-tab="utenti">👥 Utenti</button>
+    </nav>
+
+    <main class="content" id="content"><p class="loading">Caricamento configurazione…</p></main>
+
+    <script src="/admin/admin.js"></script>
+  </body>
+</html>

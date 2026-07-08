@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Informativa sulla privacy e cookie policy di Meikasait." />
+    <title>Privacy & Cookie Policy | Meikasait</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon-64.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <main class="legal-page">
+      <a class="legal-back" href="/">← Torna alla home</a>
+      <h1 id="legalTitle">Privacy &amp; Cookie Policy</h1>
+      <p class="legal-updated">Ultimo aggiornamento: <span id="legalDate">29 giugno 2026</span></p>
+
+      <p>La presente informativa descrive le modalità di trattamento dei dati personali degli utenti che consultano il sito
+      <strong id="legalCompany">Meikasait</strong> e l'utilizzo dei cookie, in conformità al Regolamento (UE) 2016/679 (GDPR)
+      e alla normativa italiana applicabile (D.Lgs. 196/2003 e successive modifiche, Provvedimenti del Garante Privacy).</p>
+
+      <h2>1. Titolare del trattamento</h2>
+      <p>Il Titolare del trattamento è <strong><span id="legalCompany2">Meikasait</span></strong>. Per qualsiasi richiesta relativa
+      ai tuoi dati personali puoi scrivere a: <a id="legalEmail" href="mailto:ciao@meikasait.it">ciao@meikasait.it</a>.</p>
+
+      <h2>2. Tipologie di dati raccolti</h2>
+      <ul>
+        <li><strong>Dati forniti volontariamente:</strong> quando compili il modulo di contatto (nome, email, eventuale messaggio e pacchetto di interesse). Tali dati vengono utilizzati esclusivamente per rispondere alla tua richiesta.</li>
+        <li><strong>Dati di navigazione:</strong> i sistemi informatici acquisiscono, durante il normale funzionamento, alcuni dati la cui trasmissione è implicita nell'uso dei protocolli di comunicazione di Internet (es. indirizzi IP, tipo di browser, sistema operativo).</li>
+        <li><strong>Cookie:</strong> come descritto al paragrafo dedicato.</li>
+      </ul>
+
+      <h2>3. Finalità e base giuridica del trattamento</h2>
+      <ul>
+        <li>Rispondere alle richieste inviate tramite il modulo di contatto — base giuridica: esecuzione di misure precontrattuali / consenso.</li>
+        <li>Garantire il corretto funzionamento e la sicurezza del sito — base giuridica: legittimo interesse del Titolare.</li>
+        <li>Cookie non tecnici: solo previo tuo consenso.</li>
+      </ul>
+
+      <h2>4. Cookie utilizzati</h2>
+      <p>Un cookie è un piccolo file di testo memorizzato dal browser. Questo sito utilizza:</p>
+      <table class="legal-table">
+        <thead><tr><th>Tipo</th><th>Finalità</th><th>Consenso</th></tr></thead>
+        <tbody>
+          <tr><td>Cookie tecnici / di preferenza</td><td>Memorizzano la tua scelta sul banner cookie (es. <em>meikasait_cookie_consent</em>) e garantiscono il funzionamento del sito.</td><td>Non richiesto (necessari)</td></tr>
+          <tr><td>Cookie statistici / di terze parti</td><td>Eventuali strumenti di analisi o servizi esterni (attivati solo se previsti).</td><td>Richiesto</td></tr>
+        </tbody>
+      </table>
+      <p>All'ingresso del sito viene mostrato un banner che ti consente di <strong>accettare</strong> o <strong>rifiutare</strong> i cookie non necessari.
+      Puoi modificare in qualsiasi momento le tue preferenze cancellando i cookie dal tuo browser, dopodiché il banner ricomparirà.</p>
+
+      <h2>5. Conservazione dei dati</h2>
+      <p>I dati forniti tramite il modulo di contatto sono conservati per il tempo strettamente necessario a gestire la richiesta e adempiere a obblighi di legge. I cookie hanno durata variabile in base alla loro tipologia.</p>
+
+      <h2>6. Comunicazione e diffusione</h2>
+      <p>I dati non sono diffusi e possono essere comunicati esclusivamente a fornitori di servizi tecnici (es. hosting) che agiscono come Responsabili del trattamento, nel rispetto della normativa vigente.</p>
+
+      <h2>7. Diritti dell'interessato</h2>
+      <p>In qualunque momento puoi esercitare i diritti previsti dagli artt. 15-22 del GDPR, tra cui: accesso, rettifica, cancellazione, limitazione, portabilità, opposizione al trattamento e revoca del consenso. Per esercitarli scrivi a <a id="legalEmail2" href="mailto:ciao@meikasait.it">ciao@meikasait.it</a>. Hai inoltre il diritto di proporre reclamo al Garante per la protezione dei dati personali (www.garanteprivacy.it).</p>
+
+      <h2>8. Modifiche alla presente informativa</h2>
+      <p>Il Titolare si riserva di aggiornare la presente informativa. Le modifiche saranno pubblicate su questa pagina con indicazione della data di ultimo aggiornamento.</p>
+    </main>
+
+    <script>
+      // Popola i dati dinamici dalla config (se disponibile)
+      (async () => {
+        try {
+          const res = await fetch("/data/content.json", { cache: "no-store" });
+          if (!res.ok) return;
+          const cfg = await res.json();
+          const p = cfg.privacy || {};
+          const company = p.companyName || cfg.brand?.name || "Meikasait";
+          const email = p.ownerEmail || cfg.brand?.email || "ciao@meikasait.it";
+          document.getElementById("legalCompany").textContent = company;
+          document.getElementById("legalCompany2").textContent = company;
+          document.querySelector("title").textContent = "Privacy & Cookie Policy | " + company;
+          ["legalEmail", "legalEmail2"].forEach((id) => {
+            const el = document.getElementById(id);
+            el.textContent = email; el.href = "mailto:" + email;
+          });
+          if (p.lastUpdate) {
+            const d = new Date(p.lastUpdate);
+            if (!isNaN(d)) document.getElementById("legalDate").textContent = d.toLocaleDateString("it-IT", { year: "numeric", month: "long", day: "numeric" });
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accesso — Meikasait Admin</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon-64.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" />
+    <style>
+      :root { --rust: #c0392b; --rust-dark: #902418; --ink: #13201c; --cream: #f6f1e6; --paper: #fffdf6; --muted: #5e6a64; --line: rgba(19,32,28,.12); }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", emoji; -webkit-font-smoothing: antialiased;
+        background: radial-gradient(circle at 16% 18%, rgba(192,57,43,.3), transparent 28rem), radial-gradient(circle at 86% 80%, rgba(0,146,70,.12), transparent 24rem), linear-gradient(135deg, #10231b 0%, #16322a 58%, #1f4a3a 100%); color: #fff; }
+      .card { width: min(92vw, 400px); padding: 2.25rem; background: var(--paper); color: var(--ink); border-radius: 24px; box-shadow: 0 30px 80px rgba(0,0,0,.4); }
+      .brand { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.5rem; font-weight: 900; font-size: 1.3rem; }
+      .brand img { width: 44px; height: 44px; object-fit: contain; }
+      .brand span { display: grid; place-items: center; width: 44px; height: 44px; background: var(--ink); color: #fff; border-radius: 12px; }
+      h1 { font-size: 1.15rem; margin: 0 0 .25rem; }
+      p.sub { margin: 0 0 1.5rem; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+      label { display: block; margin-bottom: 1rem; font-weight: 700; font-size: .88rem; color: var(--muted); }
+      input { width: 100%; margin-top: .4rem; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: 12px; font: inherit; }
+      input:focus { outline: none; border-color: var(--rust); box-shadow: 0 0 0 3px rgba(192,57,43,.15); }
+      input.code { letter-spacing: .35em; text-align: center; font-size: 1.4rem; font-weight: 800; }
+      button { width: 100%; padding: .9rem; border: 0; border-radius: 999px; background: var(--rust); color: #fff; font-weight: 800; font-size: 1rem; cursor: pointer; }
+      button:hover { background: var(--rust-dark); }
+      button.secondary { background: var(--ink); margin-top: .7rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; }
+      button.secondary:hover { background: #000; }
+      .err { display: none; margin-top: 1rem; padding: .7rem 1rem; background: #fdecec; color: #a12626; border-radius: 12px; font-size: .88rem; }
+      .step { display: none; }
+      .step.active { display: block; animation: f .25s ease; }
+      @keyframes f { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
+      .or { text-align: center; color: var(--muted); font-size: .82rem; margin: 1rem 0; position: relative; }
+      .or::before, .or::after { content: ""; position: absolute; top: 50%; width: 38%; height: 1px; background: var(--line); }
+      .or::before { left: 0; } .or::after { right: 0; }
+      .back { background: none; color: var(--muted); font-weight: 700; margin-top: 1rem; }
+      .back:hover { background: none; color: var(--ink); }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="brand"><img src="/assets/logo.png" alt="Meikasait" /> Meikasait Admin</div>
+
+      <!-- STEP 1: password -->
+      <form class="step active" id="step1">
+        <h1>Accedi al pannello</h1>
+        <p class="sub">Primo fattore: utente e password.</p>
+        <label>Utente <input name="user" type="text" autocomplete="username" required /></label>
+        <label>Password <input name="pass" type="password" autocomplete="current-password" required /></label>
+        <button type="submit">Continua</button>
+        <div class="err" id="err1">Credenziali non valide. Riprova.</div>
+      </form>
+
+      <!-- STEP 2: 2FA -->
+      <div class="step" id="step2">
+        <h1>Verifica in due passaggi</h1>
+        <p class="sub">Secondo fattore: conferma la tua identità.</p>
+
+        <button class="secondary" id="passkeyBtn" type="button" style="display:none">🔐 Usa impronta / Face ID</button>
+        <div class="or" id="orDivider" style="display:none">oppure</div>
+
+        <form id="totpForm" style="display:none">
+          <label>Codice dall'app (6 cifre)
+            <input name="token" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" />
+          </label>
+          <button type="submit">Verifica codice</button>
+        </form>
+
+        <button class="back" id="backBtn" type="button">← Torna indietro</button>
+        <div class="err" id="err2">Verifica non riuscita. Riprova.</div>
+      </div>
+    </div>
+
+    <script>
+      const $ = (s) => document.querySelector(s);
+      let methods = { totp: false, passkey: false };
+
+      function show(step) {
+        document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+        $("#" + step).classList.add("active");
+      }
+      function showErr(id, msg) { const e = $("#" + id); if (msg) e.textContent = msg; e.style.display = "block"; }
+      function hideErr(id) { $("#" + id).style.display = "none"; }
+
+      // ---- base64url helpers per WebAuthn ----
+      const b64uToBuf = (s) => { s = s.replace(/-/g, "+").replace(/_/g, "/"); const pad = s.length % 4 ? "=".repeat(4 - s.length % 4) : ""; const bin = atob(s + pad); const b = new Uint8Array(bin.length); for (let i=0;i<bin.length;i++) b[i]=bin.charCodeAt(i); return b.buffer; };
+      const bufToB64u = (buf) => { const b = new Uint8Array(buf); let s=""; for (let i=0;i<b.length;i++) s+=String.fromCharCode(b[i]); return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); };
+
+      // STEP 1: password
+      $("#step1").addEventListener("submit", async (e) => {
+        e.preventDefault(); hideErr("err1");
+        const data = Object.fromEntries(new FormData(e.target));
+        try {
+          const res = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          });
+          const out = await res.json().catch(() => ({}));
+          console.log("[LOGIN]", res.status, out);
+          if (!res.ok) {
+            showErr("err1", out.error || `Errore ${res.status}. Riprova.`);
+            return;
+          }
+          if (!out.twoFactor) { window.location.href = "/admin"; return; }
+          methods = out.methods || {};
+          $("#passkeyBtn").style.display = methods.passkey ? "flex" : "none";
+          $("#totpForm").style.display = methods.totp ? "block" : "none";
+          $("#orDivider").style.display = (methods.passkey && methods.totp) ? "block" : "none";
+          show("step2");
+          if (methods.totp) setTimeout(() => $('input[name=token]').focus(), 200);
+        } catch (err) {
+          console.error("[LOGIN error]", err);
+          showErr("err1", "Errore di rete: " + err.message);
+        }
+      });
+
+      // STEP 2: TOTP
+      $("#totpForm").addEventListener("submit", async (e) => {
+        e.preventDefault(); hideErr("err2");
+        const token = $('input[name=token]').value;
+        const res = await fetch("/api/2fa/totp", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ token }) });
+        if (res.ok) { window.location.href = "/admin"; }
+        else { showErr("err2", "Codice non valido o scaduto."); }
+      });
+
+      // STEP 2: Passkey
+      $("#passkeyBtn").addEventListener("click", async () => {
+        hideErr("err2");
+        try {
+          const optRes = await fetch("/api/2fa/passkey/options");
+          if (!optRes.ok) throw new Error("opzioni");
+          const options = await optRes.json();
+          options.challenge = b64uToBuf(options.challenge);
+          if (options.allowCredentials) options.allowCredentials = options.allowCredentials.map(c => ({ ...c, id: b64uToBuf(c.id) }));
+          const cred = await navigator.credentials.get({ publicKey: options });
+          const payload = {
+            id: cred.id, rawId: bufToB64u(cred.rawId), type: cred.type,
+            response: {
+              authenticatorData: bufToB64u(cred.response.authenticatorData),
+              clientDataJSON: bufToB64u(cred.response.clientDataJSON),
+              signature: bufToB64u(cred.response.signature),
+              userHandle: cred.response.userHandle ? bufToB64u(cred.response.userHandle) : null
+            },
+            clientExtensionResults: cred.getClientExtensionResults ? cred.getClientExtensionResults() : {}
+          };
+          const vRes = await fetch("/api/2fa/passkey/verify", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(payload) });
+          if (vRes.ok) { window.location.href = "/admin"; }
+          else { showErr("err2", "Passkey non verificata."); }
+        } catch (err) {
+          showErr("err2", "Accesso con passkey annullato o non riuscito.");
+        }
+      });
+
+      $("#backBtn").addEventListener("click", () => { hideErr("err2"); show("step1"); });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="58" viewBox="218 130 76 58" role="img" aria-label="MEIKASA.IT solo faccina" shape-rendering="geometricPrecision">
+  <title>MEIKASA.IT — solo faccina vettoriale</title>
+  <desc>Faccina vettoriale separata, mantenuta nella posizione/proporzione originale rispetto alla M, con bandierina sul sorriso.</desc>
+  <defs>
+    <style><![CDATA[
+      .beige { fill: #E3D3A6; }
+      .st-beige { fill: none; stroke: #E3D3A6; stroke-linecap: round; stroke-linejoin: round; }
+    ]]></style>
+  </defs>
+
+  <g id="faccina">
+    <path class="st-beige" d="M230 144 C234 141 240 141 244 144" stroke-width="4.6"/>
+    <circle class="beige" cx="276.5" cy="142" r="8"/>
+    <path class="st-beige" d="M229 166 C238 179 256 184 270 176" stroke-width="5"/>
+    <g id="tricolore-sorriso" fill="none" stroke-linecap="butt" stroke-linejoin="round">
+      <path d="M270 176 L275 171.5" stroke="#304634" stroke-width="5"/>
+      <path d="M275 171.5 L279.5 167.5" stroke="#FAFAF6" stroke-width="5"/>
+      <path d="M279.5 167.5 L284 163.5" stroke="#CF2628" stroke-width="5"/>
+    </g>
+  </g>
+</svg>

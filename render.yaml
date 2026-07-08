@@ -1,0 +1,30 @@
+# Configurazione Render (Blueprint).
+# Su Render puoi usare "Blueprint" e selezionare questo file, oppure
+# creare manualmente un Web Service seguendo DEPLOY.md.
+
+services:
+  - type: web
+    name: meikasait
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production        # attiva cookie Secure + HSTS
+      - key: ADMIN_USER
+        sync: false              # lo imposti tu nella dashboard Render
+      - key: ADMIN_PASS_HASH
+        sync: false              # hash bcrypt generato con: node tools/hash-password.js
+      - key: SESSION_SECRET
+        generateValue: true      # Render genera una chiave casuale sicura
+      # --- 2FA (opzionali ma consigliati) ---
+      - key: ADMIN_TOTP_SECRET
+        sync: false              # genera con: node tools/setup-totp.js
+      - key: ADMIN_PASSKEY
+        sync: false              # ottieni dalla scheda Sicurezza del pannello
+      - key: RP_ID
+        sync: false              # il tuo dominio Render, es: meikasait.onrender.com
+      - key: ORIGIN
+        sync: false              # URL completo, es: https://meikasait.onrender.com

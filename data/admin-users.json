@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "users": [
+    {
+      "id": "dd41ffba-8f04-4914-8d2e-53e298168790",
+      "username": "admin",
+      "email": "",
+      "role": "owner",
+      "active": true,
+      "passwordHash": "$2a$12$fNJ8hgnwOjLIaoCsdQao0eTrHu8gPsj/FUPhYFr0V8kk9RLOsmvoK",
+      "passkeys": [],
+      "createdAt": "2026-07-06T21:33:21.145Z",
+      "updatedAt": "2026-07-07T18:01:50.911Z",
+      "lastLoginAt": "2026-07-07T18:01:50.911Z"
+    }
+  ]
+}

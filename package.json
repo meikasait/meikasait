@@ -1,0 +1,47 @@
+{
+  "name": "meikasait-web",
+  "version": "3.0.0",
+  "description": "Sito Meikasait (make-a-site, all'italiana) con backend di gestione homepage, pannello admin multi-utente, ruoli e passkey WebAuthn, schede lavoro cliccabili e pacchetti marketing/social.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "dev": "node server.js",
+    "hash": "node tools/hash-password.js",
+    "totp": "node tools/setup-totp.js",
+    "create-admin": "node tools/create-admin.js",
+    "list-admins": "node tools/list-admin-users.js",
+    "reset-admin": "node tools/reset-admin-password.js",
+    "unlock-admin": "node tools/unlock-admin.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "sito",
+    "portfolio",
+    "web-design",
+    "cms",
+    "admin",
+    "2fa",
+    "webauthn",
+    "passkey",
+    "totp",
+    "multi-user",
+    "roles"
+  ],
+  "author": "Meikasait",
+  "license": "MIT",
+  "dependencies": {
+    "@simplewebauthn/server": "^10.0.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^9.0.3",
+    "otplib": "^12.0.1",
+    "qrcode": "^1.5.4"
+  }
+}

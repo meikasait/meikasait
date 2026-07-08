@@ -1,0 +1,604 @@
+{
+  "theme": {
+    "colors": {
+      "bg": "#f6f1e6",
+      "paper": "#fffdf6",
+      "ink": "#13201c",
+      "ink2": "#1d2f29",
+      "muted": "#5e6a64",
+      "mutedDark": "#b3c0b9",
+      "cream": "#f6f1e6",
+      "sand": "#ead3ad",
+      "sage": "#cfe0d2",
+      "rust": "#c0392b",
+      "rustDark": "#902418",
+      "olive": "#5d7a45",
+      "basil": "#3e6b3a",
+      "tricolorRed": "#ce2b37",
+      "tricolorWhite": "#f4f5f0",
+      "tricolorGreen": "#009246",
+      "heroFrom": "#10231b",
+      "heroMid": "#16322a",
+      "heroTo": "#1f4a3a"
+    },
+    "fonts": {
+      "family": "'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "googleFontUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&display=swap",
+      "headingFamily": "'Fraunces', 'Plus Jakarta Sans', ui-serif, Georgia, serif",
+      "baseSize": "16px",
+      "h1Size": "clamp(2.8rem, 6.6vw, 5.6rem)",
+      "h2Size": "clamp(1.9rem, 3.8vw, 3.2rem)",
+      "radius": "26px"
+    }
+  },
+  "brand": {
+    "name": "MEIKASA.IT",
+    "logoText": "M",
+    "logoImage": "/uploads/1783457528944-65faf816-logo-m.png",
+    "logoWordmark": "/uploads/1783457679418-5663a993-logoscritta.png",
+    "logoBgShape": "rounded",
+    "logoBgColor": "#ffffff",
+    "logoBgColorDark": "",
+    "logoBgOnLight": true,
+    "logoBgOnDark": false,
+    "logoBgPadding": 4,
+    "logoBgRadius": 8,
+    "logoBgBorder": true,
+    "tagline": "Make-a-site: siti web chiari, solidi, semplici ma decisi. Come un caffè all'italiana.",
+    "email": "wimeikasait@gmail.com",
+    "phone": "+39 379 360 2462",
+    "instagram": "@meikasa.it",
+    "instagramUrl": "https://www.instagram.com/meikasa.it?utm_source=qr&igsh=MW9veWhwYzZnZjF5",
+    "instagramNote": "La nostra pagina Instagram è molto divertente, oltre che istruttiva. Seguici!",
+    "city": "Italia",
+    "vatNote": "Sì, fatturiamo davvero."
+  },
+  "nav": {
+    "links": [
+      {
+        "label": "Servizi",
+        "href": "#servizi"
+      },
+      {
+        "label": "Lavori",
+        "href": "#lavori"
+      },
+      {
+        "label": "Marketing",
+        "href": "#marketing"
+      },
+      {
+        "label": "Pacchetti",
+        "href": "#preventivo"
+      }
+    ],
+    "ctaLabel": "Parliamone",
+    "ctaHref": "#contatti"
+  },
+  "banner": {
+    "enabled": false,
+    "text": "Lancio Meikasait: primo mese di gestione social in regalo per chi parte con un sito completo.",
+    "linkLabel": "Scopri come",
+    "linkHref": "#marketing",
+    "background": "#13201c",
+    "color": "#fffdf6"
+  },
+  "sectionsOrder": [
+    "hero",
+    "services",
+    "works",
+    "marketing",
+    "packages"
+  ],
+  "hero": {
+    "enabled": true,
+    "eyebrow": "Web design & marketing, fatti come si deve",
+    "title": "Make-a-site. Ma fallo bene.",
+    "text": "Meikasait costruisce siti web chiari, veloci e belli. \nPunto. Niente fronzoli.",
+    "primaryCtaLabel": "Vedi i lavori",
+    "primaryCtaHref": "#lavori",
+    "secondaryCtaLabel": "Richiedi preventivo",
+    "secondaryCtaHref": "#contatti",
+    "summaryTitle": "In breve",
+    "summaryCards": [
+      {
+        "icon": "🌐",
+        "title": "Siti su misura",
+        "text": "Niente template, niente \"copia-incolla\". Solo struttura pensata per te."
+      },
+      {
+        "icon": "📣",
+        "title": "Post & sponsor",
+        "text": "Calendari editoriali e campagne pronte: tu approvi, noi pubblichiamo."
+      },
+      {
+        "icon": "🇮🇹",
+        "title": "Made in Italy",
+        "text": "Lavoro artigiano, comunicazione diretta, e — sì — anche un buon caffè."
+      }
+    ],
+    "steps": [
+      {
+        "number": "01",
+        "title": "Brief",
+        "text": "Capiamo obiettivi, pubblico e contenuti. Domande dirette, niente fuffa."
+      },
+      {
+        "number": "02",
+        "title": "Bozza",
+        "text": "Struttura, stile visivo e testi iniziali. Ti facciamo vedere prima."
+      },
+      {
+        "number": "03",
+        "title": "Sviluppo",
+        "text": "Sito veloce, responsive e ottimizzato. Pulito sotto il cofano."
+      },
+      {
+        "number": "04",
+        "title": "Lancio",
+        "text": "Pubblichiamo, monitoriamo e — se vuoi — partiamo coi social."
+      }
+    ],
+    "background": {
+      "image": "/uploads/1783456371406-16626552-hero-bg-code.jpg",
+      "opacity": 0.5,
+      "position": "center center",
+      "size": "cover",
+      "blur": 3,
+      "overlayColor": "#10231b",
+      "overlayOpacity": 0.3
+    },
+    "summaryBackground": {
+      "enabled": false,
+      "color": "",
+      "image": "",
+      "opacity": 1,
+      "position": "center center",
+      "size": "cover",
+      "overlayColor": "#000000",
+      "overlayOpacity": 0
+    }
+  },
+  "services": {
+    "enabled": false,
+    "eyebrow": "Cosa facciamo",
+    "title": "Tre cose. Fatte bene.",
+    "text": "Non vogliamo essere tuttologi. Facciamo siti, contenuti e sponsor con la stessa cura con cui un sarto cuce un completo: tu scegli il taglio, noi prendiamo le misure.",
+    "items": [
+      {
+        "icon": "🖥️",
+        "title": "Siti web su misura",
+        "text": "Vetrina, portfolio, menu digitale, landing per campagne. Tutti veloci, accessibili e pronti a crescere.",
+        "linkLabel": "Vedi pacchetti",
+        "linkHref": "#preventivo"
+      },
+      {
+        "icon": "📱",
+        "title": "Post & sponsorizzazioni",
+        "text": "Calendario editoriale mensile + campagne sponsorizzate. Non gestiamo i tuoi profili: prepariamo i contenuti e li promuoviamo. (Gestione completa profili in arrivo.)",
+        "linkLabel": "Scopri gli abbonamenti",
+        "linkHref": "#marketing"
+      },
+      {
+        "icon": "🛠️",
+        "title": "Manutenzione & evoluzione",
+        "text": "Aggiornamenti, nuove sezioni, mini-restyling. Il tuo sito invecchia come il vino, non come il pane.",
+        "linkLabel": "Scrivici",
+        "linkHref": "#contatti"
+      }
+    ]
+  },
+  "works": {
+    "enabled": true,
+    "eyebrow": "Vetrina",
+    "title": "I nostri lavori",
+    "text": "Una panoramica generale dei progetti realizzati. Clicca per vedere come strutturiamo ogni sito.",
+    "autoscroll": true,
+    "items": [
+      {
+        "slug": "automazionireitano-it",
+        "name": "Reitano automazioni ",
+        "type": "Sito vetrina",
+        "sector": "Consulenza",
+        "url": "#",
+        "initials": "AR",
+        "color": "#273f3a",
+        "accent": "#cf6f35",
+        "icon": "📊",
+        "image": "/uploads/1783374533292-267e8b68-screenshot-2026-07-06-234749.png",
+        "description": "Automazione industriale",
+        "details": {
+          "overview": "Servizi di automazione industriale con progetti PLC e programmazione avanzata",
+          "challenge": "Tradurre un'offerta tecnica complessa in pagine semplici da leggere, mantenendo un'aria istituzionale ma calda.",
+          "approach": "Struttura a 4 pagine (Servizi, Chi siamo, Lavori, Contatti), copy ridotto all'osso, palette sobria e tipografia leggibile. Iconografia minimal, niente stock photo.",
+          "highlights": [
+            "Sezione servizi modulare, facile da estendere",
+            "Modulo contatti con filtro anti-spam",
+            "Performance ottimizzate (LCP < 1,8s)",
+            "SEO on-page e schema markup base"
+          ],
+          "deliverables": [
+            "Design responsive",
+            "Sito multipagina",
+            "Form contatti",
+            "SEO tecnica"
+          ],
+          "duration": "≈ 3 settimane",
+          "stack": [
+            "HTML/CSS/JS",
+            "Hosting statico",
+            "Plausible Analytics"
+          ],
+          "gallery": [
+            "/uploads/1783374607511-87c01d86-screenshot-2026-07-06-234804.png",
+            "/uploads/1783374610933-1c057e0d-screenshot-2026-07-06-234818.png",
+            "/uploads/1783374614459-1af972e4-screenshot-2026-07-06-234832.png"
+          ]
+        }
+      },
+      {
+        "slug": "tarttoria-borgo",
+        "name": "Trattoria del Borgo",
+        "type": "Menù ristorante",
+        "sector": "Ristorazione",
+        "url": "#",
+        "initials": "TB",
+        "color": "#460207",
+        "accent": "#9fb7ff",
+        "icon": "🍝",
+        "image": "/uploads/1783461266121-91967ad3-screenshot-2026-07-07-235421.png",
+        "description": "Menù realizzato per ristorante con piatti, bevande e info varie",
+        "details": {
+          "overview": "Menù dinamico per locale schick. \nL'idea: creare un menù semplice, intuitivo e con un layout pulito che racconti i piatti tipici del loale. ",
+          "challenge": "Mostrare tanti progetti diversi mantenendo una griglia armonica e una navigazione veloce.",
+          "approach": "Griglia masonry con filtri categoria, pagina dedicata per ogni progetto, microinterazioni discrete. Cura della tipografia e dei dettagli editoriali.",
+          "highlights": [
+            "Filtri per categoria e settore",
+            "Schede progetto con galleria",
+            "Caricamento immagini ottimizzato (lazy + responsive srcset)",
+            "Transizioni fluide tra le pagine"
+          ],
+          "deliverables": [
+            "UX/UI",
+            "Portfolio filtrabile",
+            "Schede progetto",
+            "CMS leggero"
+          ],
+          "duration": "≈ 4-5 settimane",
+          "stack": [
+            "HTML/CSS/JS",
+            "CMS headless",
+            "CDN immagini"
+          ],
+          "gallery": [
+            "/uploads/1783461648273-36634b80-2.png",
+            "/uploads/1783461652558-9198c6c0-3.png",
+            "/uploads/1783462066081-183fb4ec-4.png"
+          ]
+        }
+      },
+      {
+        "slug": "osteria-lume",
+        "name": "Osteria Lume",
+        "type": "Menu digitale",
+        "sector": "Ristorazione",
+        "url": "#",
+        "initials": "OL",
+        "color": "#40291f",
+        "accent": "#f0b36a",
+        "icon": "🍽️",
+        "image": "",
+        "description": "Menu online responsive, leggibile da QR code e facile da aggiornare.",
+        "details": {
+          "overview": "Sito vetrina + menu digitale per un'osteria. Obiettivo: meno menù plastificati al tavolo, più aggiornamenti rapidi dei piatti del giorno.",
+          "challenge": "Far convivere atmosfera calda dell'osteria con un menu che fosse rapido da leggere su smartphone, anche con connessione lenta.",
+          "approach": "Home con foto evocative, pagina menu strutturata per portate, schede piatto con allergeni e prezzi. QR code stampati per i tavoli.",
+          "highlights": [
+            "Menu aggiornabile in pochi minuti",
+            "Allergeni e indicazioni dietetiche per ogni piatto",
+            "QR code pronto stampa",
+            "Pagina contatti con mappa e prenotazione email"
+          ],
+          "deliverables": [
+            "Sito vetrina",
+            "Menu digitale",
+            "QR code",
+            "SEO local"
+          ],
+          "duration": "≈ 3 settimane",
+          "stack": [
+            "HTML/CSS/JS",
+            "Hosting statico",
+            "QR personalizzati"
+          ],
+          "gallery": []
+        }
+      },
+      {
+        "slug": "neri-lab",
+        "name": "Neri Lab",
+        "type": "Landing page",
+        "sector": "Artigianato",
+        "url": "#",
+        "initials": "NL",
+        "color": "#2d2d2a",
+        "accent": "#8fd6b8",
+        "icon": "🛠️",
+        "image": "",
+        "description": "Pagina singola per raccontare lavorazioni, materiali e contatti.",
+        "details": {
+          "overview": "Landing page d'autore per un laboratorio artigiano. Una sola pagina, raccontata come una storia, per chi vuole comunicare passione e mestiere.",
+          "challenge": "Raccontare tanto in poco spazio: materiali, processo, valori e contatti senza appesantire la lettura.",
+          "approach": "Long-page con sezioni distinte, fotografie grandi e copy diretto. CTA singola e chiara: contatto via email o WhatsApp.",
+          "highlights": [
+            "Storytelling in long-form",
+            "Galleria immagini ad alto impatto",
+            "Modulo contatti rapido",
+            "Tempi di caricamento sotto i 2 secondi"
+          ],
+          "deliverables": [
+            "Landing page",
+            "Fotografia placement",
+            "Form contatti",
+            "WhatsApp link"
+          ],
+          "duration": "≈ 2 settimane",
+          "stack": [
+            "HTML/CSS/JS",
+            "Hosting statico"
+          ],
+          "gallery": []
+        }
+      },
+      {
+        "slug": "casa-mira",
+        "name": "Casa Mira",
+        "type": "Sito vetrina",
+        "sector": "Immobiliare",
+        "url": "#",
+        "initials": "CM",
+        "color": "#313949",
+        "accent": "#d5b27c",
+        "icon": "🏠",
+        "image": "",
+        "description": "Sito ordinato per valorizzare immobili, servizi e richieste appuntamento.",
+        "details": {
+          "overview": "Sito per agenzia immobiliare di quartiere: ordinato, autorevole, con focus su lead qualificati per appuntamenti in agenzia.",
+          "challenge": "Trasmettere serietà e radicamento sul territorio senza scadere nel solito \"sito immobiliare\".",
+          "approach": "Home pulita, sezione servizi chiara, pagina dedicata agli immobili in evidenza, form richiesta appuntamento.",
+          "highlights": [
+            "Pagina immobili in evidenza facile da aggiornare",
+            "Form appuntamento con scelta orario",
+            "Sezione 'Chi siamo' centrata sul team",
+            "Integrazione mappe e contatti rapidi"
+          ],
+          "deliverables": [
+            "Sito vetrina",
+            "Schede immobili",
+            "Form appuntamento",
+            "Integrazione mappe"
+          ],
+          "duration": "≈ 4 settimane",
+          "stack": [
+            "HTML/CSS/JS",
+            "Form backend",
+            "Hosting statico"
+          ],
+          "gallery": []
+        }
+      },
+      {
+        "slug": "vela-bar",
+        "name": "Vela Bar",
+        "type": "Menu digitale",
+        "sector": "Food & drink",
+        "url": "#",
+        "initials": "VB",
+        "color": "#143642",
+        "accent": "#7fd1d8",
+        "icon": "🍸",
+        "image": "",
+        "description": "Menu cocktail e aperitivi con categorie, prezzi e note allergeni.",
+        "details": {
+          "overview": "Sito per cocktail bar con focus sul menu drink. Mood scuro ed elegante, navigazione rapidissima.",
+          "challenge": "Creare un menu drink che si leggesse bene anche in pieno aperitivo, con luce bassa e schermi piccoli.",
+          "approach": "Tema scuro, contrasti alti, categorie a tab, schede drink con ingredienti e note allergeni. QR code da stampare sui sottobicchieri.",
+          "highlights": [
+            "Tema scuro ad alto contrasto",
+            "Categorie drink a tab",
+            "Schede ingrediente con allergeni",
+            "QR code personalizzato"
+          ],
+          "deliverables": [
+            "Sito vetrina",
+            "Menu drink",
+            "QR code",
+            "Sezione eventi"
+          ],
+          "duration": "≈ 3 settimane",
+          "stack": [
+            "HTML/CSS/JS",
+            "Hosting statico"
+          ],
+          "gallery": []
+        }
+      }
+    ]
+  },
+  "marketing": {
+    "enabled": true,
+    "eyebrow": "Marketing & social",
+    "title": "Post e sponsor mirate.",
+    "text": "Niente \"crescita esponenziale in 30 giorni\". Solo contenuti pensati per il tuo pubblico e sponsorizzazioni gestite con criterio. Ci occupiamo Noi dei tuoi contenuti e delle tue campagne.",
+    "note": "🚧 Gestione totale dei profili social in fase di sviluppo. Per ora forniamo contenuti pronti da pubblicare e gestione delle campagne sponsorizzate.",
+    "items": [
+      {
+        "name": "Social Starter",
+        "icon": "🌱",
+        "badge": "Per iniziare",
+        "price": "€149/mese",
+        "image": "",
+        "description": "4 post mensili pronti da pubblicare, coerenti con la tua identità visiva. Tu approvi, noi consegnamo.",
+        "features": [
+          "4 post grafici al mese",
+          "Caption + hashtag mirati",
+          "Calendario editoriale condiviso",
+          "Una revisione per post inclusa",
+          "Report mensile semplificato"
+        ]
+      },
+      {
+        "name": "Social Plus",
+        "icon": "📈",
+        "badge": "Più richiesto",
+        "price": "€289/mese",
+        "image": "",
+        "description": "8 post + 1 reel/video corto al mese. Per chi vuole esserci con costanza senza pensieri.",
+        "features": [
+          "8 post grafici al mese",
+          "1 reel o short video",
+          "Stories tematiche mensili",
+          "Calendario editoriale condiviso",
+          "Due revisioni per post"
+        ]
+      },
+      {
+        "name": "Sponsor Boost",
+        "icon": "🚀",
+        "badge": "Per visibilità",
+        "price": "da €199/mese + budget ads",
+        "image": "",
+        "description": "Pianifichiamo e gestiamo le campagne sponsorizzate su Meta/Instagram. Budget ads gestito separatamente, scelto da te.",
+        "features": [
+          "Setup pixel e tracciamento",
+          "Targeting per zona/interessi/pubblici simili",
+          "2 campagne attive in parallelo",
+          "Ottimizzazione bisettimanale",
+          "Report mensile con consigli"
+        ]
+      },
+      {
+        "name": "Full Brand",
+        "icon": "💎",
+        "badge": "Tutto incluso",
+        "price": "da €499/mese",
+        "image": "",
+        "description": "Contenuti + sponsor + revisione mensile della comunicazione. Per chi vuole un partner stabile.",
+        "features": [
+          "12 post + 2 reel al mese",
+          "1 campagna sponsorizzata sempre attiva",
+          "Stories settimanali e momenti chiave",
+          "Call mensile di strategia",
+          "Pacchetto fotografico semestrale"
+        ]
+      }
+    ],
+    "soon": {
+      "enabled": false,
+      "title": "🛎️ Coming soon: gestione completa profili",
+      "text": "Risposte ai messaggi, community management, collaborazioni con creator e altro. Iscriviti alla nostra newsletter per saperlo prima di tutti."
+    }
+  },
+  "packages": {
+    "enabled": true,
+    "eyebrow": "Pacchetti sito",
+    "title": "Partiamo da un pacchetto, poi lo cuciamo addosso al progetto.",
+    "text": "I prezzi sono una base: ogni preventivo viene tarato su contenuti, pagine, funzionalità e urgenza. Aggiungiamo l'IVA e zero brutte sorprese.",
+    "items": [
+      {
+        "name": "Starter Vetrina",
+        "icon": "🌱",
+        "badge": "Per iniziare",
+        "price": "da €590",
+        "image": "./assets/package-starter.png",
+        "description": "Una presenza online essenziale e professionale per liberi professionisti e piccole attività.",
+        "features": [
+          "1 pagina completa",
+          "Design responsive",
+          "Sezioni servizi e contatti",
+          "Modulo richiesta via email",
+          "Ottimizzazione base SEO"
+        ]
+      },
+      {
+        "name": "Vetrina Plus",
+        "icon": "🛠️",
+        "badge": "Più richiesto",
+        "price": "da €990",
+        "image": "./assets/package-manual.png",
+        "description": "Sito più completo con pagine dedicate, copy ordinato e struttura pensata per convertire visite in richieste.",
+        "features": [
+          "Fino a 5 pagine",
+          "Animazioni leggere",
+          "Portfolio/lavori",
+          "Integrazione mappe e social",
+          "SEO on-page base"
+        ]
+      },
+      {
+        "name": "Portfolio Pro",
+        "icon": "💎",
+        "badge": "Progetti premium",
+        "price": "da €1.390",
+        "image": "./assets/package-elite.png",
+        "description": "Galleria lavori avanzata per professionisti, studi e attività che vogliono valorizzare progetti di qualità.",
+        "features": [
+          "Galleria filtrabile",
+          "Categorie personalizzate",
+          "Schede progetto",
+          "Layout fotografico premium",
+          "Form di preventivo"
+        ]
+      },
+      {
+        "name": "Restaurant Web/Menu",
+        "icon": "🍽️",
+        "badge": "Ristorazione",
+        "price": "da €1.590",
+        "image": "./assets/package-restaurant.png",
+        "description": "Sito per ristorazione con menu digitale, categorie, allergeni e struttura pronta per comunicare il locale.",
+        "features": [
+          "Sito vetrina ristorante",
+          "Menu responsive",
+          "Categorie piatti e drink",
+          "Allergeni e prezzi",
+          "QR code pronto stampa"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Parliamone",
+    "title": "Raccontaci cosa vuoi costruire.",
+    "text": "Compila il modulo. Ti rispondiamo entro 24 ore lavorative — al massimo un caffè di ritardo.",
+    "enabled": true
+  },
+  "footer": {
+    "text": "Tutti i diritti riservati. ",
+    "privacyLabel": "Privacy & Cookie Policy",
+    "enabled": true
+  },
+  "privacy": {
+    "companyName": "Meikasa.it",
+    "ownerEmail": "wimeikasait@gmail.com",
+    "lastUpdate": "2026-07-07"
+  },
+  "seo": {
+    "title": "Meikasa.it — Siti web e marketing all'italiana",
+    "description": "Meikasait progetta siti web chiari, veloci e su misura, e gestisce contenuti e sponsorizzazioni social per professionisti, attività locali e ristorazione.",
+    "ogImage": "",
+    "favicon": "/uploads/1783441972592-9ec846dd-logo-meikasait-solo-faccina.png",
+    "keywords": "siti web, web design, marketing social, sponsorizzate, professionisti, ristoranti, Italia"
+  },
+  "pageBackground": {
+    "enabled": false,
+    "image": "",
+    "color": "#e3ccfd",
+    "opacity": 1,
+    "position": "center center",
+    "size": "cover",
+    "blur": 0,
+    "overlayColor": "#000000",
+    "overlayOpacity": 0
+  }
+}
