@@ -808,3 +808,29 @@ body.wm-open { overflow: hidden; }
 }
 .contact-result small { display: block; margin-top: .4rem; opacity: .8; }
 .contact-result a { color: inherit; text-decoration: underline; font-weight: 700; }
+
+/* ============ FIX MENU MOBILE INVISIBILE ============ */
+@media (max-width: 760px) {
+  .nav.open a,
+  .site-header.is-on-dark .nav.open a,
+  .site-header.is-on-light .nav.open a {
+    color: var(--ink) !important;
+    background: transparent !important;
+    padding: 1rem !important;
+    border-radius: 12px !important;
+    display: block !important;
+    text-align: center;
+    font-weight: 600;
+  }
+  .nav.open a:hover,
+  .site-header.is-on-dark .nav.open a:hover,
+  .site-header.is-on-light .nav.open a:hover {
+    background: rgba(19, 32, 28, .08) !important;
+  }
+  .nav.open .nav-cta,
+  .site-header.is-on-dark .nav.open .nav-cta,
+  .site-header.is-on-light .nav.open .nav-cta {
+    color: white !important;
+    background: var(--ink) !important;
+  }
+}
