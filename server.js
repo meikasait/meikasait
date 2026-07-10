@@ -225,16 +225,36 @@ const smtpConfig = {
 };
 
 const mailTransporter = (smtpConfig.host && smtpConfig.auth.user && smtpConfig.auth.pass)
-  ? nodemailer.createTransport(smtpConfig)
+  ? nodemailer.createTransport({
+      ...smtpConfig,
+      connectionTimeout: 30000,   // 30 sec per la connessione iniziale
+      greetingTimeout: 30000,
+      socketTimeout: 30000,
+      pool: true,                 // riusa connessioni (più veloce)
+      maxConnections: 3,
+      maxMessages: 100,
+      logger: false,
+    })
   : null;
 
-if (!mailTransporter) {
-  warnings.push("SMTP non configurato: il form contatti non invierà email. Imposta SMTP_HOST, SMTP_USER, SMTP_PASS in .env");
-} else {
-  mailTransporter.verify().then(
-    () => console.log("  SMTP connesso correttamente a " + smtpConfig.host),
-    (err) => console.warn("  SMTP non raggiungibile:", err.message)
-  );
+// Helper: invia con retry automatico (3 tentativi)
+async function sendMailWithRetry(mailOptions, maxAttempts = 3) {
+  let lastError = null;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const info = await mailTransporter.sendMail(mailOptions);
+      if (attempt > 1) console.log("[contact] Email inviata al tentativo " + attempt);
+      return info;
+    } catch (err) {
+      lastError = err;
+      console.warn("[contact] Tentativo " + attempt + "/" + maxAttempts + " fallito:", err.code || err.message);
+      if (attempt < maxAttempts) {
+        // Aspetta 2 sec prima di riprovare
+        await new Promise(r => setTimeout(r, 2000));
+      }
+    }
+  }
+  throw lastError;
 }
 
 const contactLimiter = rateLimit({
@@ -305,14 +325,24 @@ app.post("/api/contact", contactLimiter, sameOriginGuard, async (req, res) => {
         '</p>' +
       '</div>';
 
-    await mailTransporter.sendMail({
+    const mailOptions = {
       from: process.env.MAIL_FROM || smtpConfig.auth.user,
       to: process.env.MAIL_TO || smtpConfig.auth.user,
       replyTo: name + " <" + email + ">",
       subject: subject,
       text: textBody,
       html: htmlBody,
-    });
+    };
+
+    // Rispondi SUBITO all'utente (miglior UX)
+    res.json({ ok: true });
+
+    // Invia in background con retry (non blocca la risposta HTTP)
+    sendMailWithRetry(mailOptions).then(
+      () => console.log("[contact] Email inviata da " + email + " (" + name + ")"),
+      (err) => console.error("[contact] Errore invio email definitivo dopo retry:", err.message)
+    );
+    return;
 
     console.log("[contact] Email inviata da " + email + " (" + name + ")");
     res.json({ ok: true });
