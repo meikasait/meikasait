@@ -211,47 +211,66 @@ function completeLogin(req, user) {
   delete req.session.halfUserId;
   auth.markLogin(user.id);
 }
-/* =========================== CONTACT FORM (SMTP) =========================== */
+/* =========================== CONTACT FORM (SMTP con doppio fallback porta) =========================== */
 const nodemailer = require("nodemailer");
 
-const smtpConfig = {
-  host: process.env.SMTP_HOST || "",
-  port: parseInt(process.env.SMTP_PORT || "465", 10),
-  secure: process.env.SMTP_SECURE !== "false",
-  auth: {
-    user: process.env.SMTP_USER || "",
-    pass: process.env.SMTP_PASS || "",
-  },
+// Configurazione base SMTP
+const smtpAuth = {
+  user: process.env.SMTP_USER || "",
+  pass: process.env.SMTP_PASS || "",
 };
+const smtpHost = process.env.SMTP_HOST || "";
 
-const mailTransporter = (smtpConfig.host && smtpConfig.auth.user && smtpConfig.auth.pass)
-  ? nodemailer.createTransport({
-      ...smtpConfig,
-      connectionTimeout: 30000,   // 30 sec per la connessione iniziale
-      greetingTimeout: 30000,
-      socketTimeout: 30000,
-      pool: true,                 // riusa connessioni (più veloce)
-      maxConnections: 3,
-      maxMessages: 100,
-      logger: false,
-    })
-  : null;
+// Creiamo due transporter: uno con STARTTLS (587) e uno con SSL diretto (465)
+function makeTransporter(port, secure) {
+  return nodemailer.createTransport({
+    host: smtpHost,
+    port: port,
+    secure: secure,
+    auth: smtpAuth,
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
+    socketTimeout: 20000,
+    pool: false,
+    logger: false,
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+}
 
-// Helper: invia con retry automatico (3 tentativi)
-async function sendMailWithRetry(mailOptions, maxAttempts = 3) {
+const transporter587 = (smtpHost && smtpAuth.user && smtpAuth.pass) ? makeTransporter(587, false) : null;
+const transporter465 = (smtpHost && smtpAuth.user && smtpAuth.pass) ? makeTransporter(465, true) : null;
+const mailTransporter = transporter587 || transporter465;
+
+if (!mailTransporter) {
+  warnings.push("SMTP non configurato: il form contatti non invierà email.");
+} else {
+  console.log("  ✉️  SMTP configurato: prova prima porta 587 (STARTTLS), fallback 465 (SSL). Host: " + smtpHost);
+}
+
+// Helper: prova con retry alternando le porte
+async function sendMailWithRetry(mailOptions, maxAttempts = 4) {
+  const transporters = [
+    { name: "587-STARTTLS", t: transporter587 },
+    { name: "465-SSL", t: transporter465 },
+    { name: "587-STARTTLS", t: transporter587 },
+    { name: "465-SSL", t: transporter465 },
+  ];
   let lastError = null;
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+  for (let i = 0; i < Math.min(maxAttempts, transporters.length); i++) {
+    const { name, t } = transporters[i];
+    if (!t) continue;
     try {
-      const info = await mailTransporter.sendMail(mailOptions);
-      if (attempt > 1) console.log("[contact] Email inviata al tentativo " + attempt);
+      console.log("[contact] Tentativo " + (i + 1) + "/" + maxAttempts + " via " + name + "...");
+      const info = await t.sendMail(mailOptions);
+      console.log("[contact] ✓ Email inviata con successo via " + name);
       return info;
     } catch (err) {
       lastError = err;
-      console.warn("[contact] Tentativo " + attempt + "/" + maxAttempts + " fallito:", err.code || err.message);
-      if (attempt < maxAttempts) {
-        // Aspetta 2 sec prima di riprovare
-        await new Promise(r => setTimeout(r, 2000));
-      }
+      console.warn("[contact] Tentativo " + (i + 1) + " via " + name + " fallito:", err.code || err.message);
+      // Aspetta 1 sec prima di ritentare
+      if (i < maxAttempts - 1) await new Promise(r => setTimeout(r, 1000));
     }
   }
   throw lastError;
@@ -292,19 +311,15 @@ app.post("/api/contact", contactLimiter, sameOriginGuard, async (req, res) => {
     const subject = "[Meikasa.it] Nuova richiesta da " + name + (packageName ? " - " + packageName : "");
 
     const textBody =
-      "Nuova richiesta dal sito Meikasa.it\n" +
-      "\n" +
+      "Nuova richiesta dal sito Meikasa.it\n\n" +
       "Nome: " + name + "\n" +
       "Email: " + email + "\n" +
-      "Pacchetto/servizio: " + (packageName || "-") + "\n" +
-      "\n" +
-      "Messaggio:\n" +
-      message + "\n" +
-      "\n" +
+      "Pacchetto/servizio: " + (packageName || "-") + "\n\n" +
+      "Messaggio:\n" + message + "\n\n" +
       "---\n" +
       "Consenso privacy: accettato il " + dataStr + "\n" +
       "IP: " + req.ip + "\n" +
-      "User-Agent: " + (req.get("user-agent") || "n/d") + "\n";
+      "User-Agent: " + (req.get("user-agent") || "n/d");
 
     const htmlBody =
       '<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:1.5rem;background:#f6f1e6;color:#13201c">' +
@@ -326,28 +341,25 @@ app.post("/api/contact", contactLimiter, sameOriginGuard, async (req, res) => {
       '</div>';
 
     const mailOptions = {
-      from: process.env.MAIL_FROM || smtpConfig.auth.user,
-      to: process.env.MAIL_TO || smtpConfig.auth.user,
+      from: process.env.MAIL_FROM || smtpAuth.user,
+      to: process.env.MAIL_TO || smtpAuth.user,
       replyTo: name + " <" + email + ">",
       subject: subject,
       text: textBody,
       html: htmlBody,
     };
 
-    // Rispondi SUBITO all'utente (miglior UX)
-    res.json({ ok: true });
+    // Rispondi SUBITO all'utente (UX ottimale)
+    res.json({ ok: true, message: "Richiesta ricevuta! Ti risponderemo entro 24 ore." });
 
-    // Invia in background con retry (non blocca la risposta HTTP)
+    // Invia in background con 4 tentativi (alternando porta 587 e 465)
     sendMailWithRetry(mailOptions).then(
-      () => console.log("[contact] Email inviata da " + email + " (" + name + ")"),
-      (err) => console.error("[contact] Errore invio email definitivo dopo retry:", err.message)
+      () => console.log("[contact] Email inviata da " + email + " (" + name + ") ✓"),
+      (err) => console.error("[contact] Errore definitivo dopo tutti i retry:", err.message, "| Email persa:", { name, email, packageName })
     );
     return;
-
-    console.log("[contact] Email inviata da " + email + " (" + name + ")");
-    res.json({ ok: true });
   } catch (err) {
-    console.error("[contact] Errore invio email:", err);
+    console.error("[contact] Errore nel handler:", err);
     res.status(500).json({ error: "Errore durante l'invio. Riprova o scrivici direttamente." });
   }
 });
